@@ -4,19 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using Newtonsoft.Json;
-using VCubWatcher.Models;
+using BridgeMonitor.Models;
 
 namespace BridgeMonitor.Controllers
 {
     public class FermetureController : Controller
     {
-
         public static List<Boats> BoatsList = new List<Boats>();
         public FermetureController()
         {
             using (HttpClient client = new HttpClient())
             {
-                using (HttpResponseMessage response = client.GetAsync("https://api.alexandredubois.com/vcub-backend/vcub.php").Result)
+                using (HttpResponseMessage response = client.GetAsync("https://api.alexandredubois.com/pont-chaban/api.php").Result)
                 {
                     using (HttpContent content = response.Content)
                     {
@@ -28,17 +27,17 @@ namespace BridgeMonitor.Controllers
         }
         public IActionResult AllFermeture()
         {
-            return View();
+            return View(BoatsList);
         }
 
         public IActionResult FermetureDetail()
         {
-            return View();
+            return View(BoatsList);
         }
 
         public IActionResult NextFermeture()
         {
-            return View();
+            return View(BoatsList);
         }
 
         // POST: Fermeture/Create

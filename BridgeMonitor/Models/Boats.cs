@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System;
 using Newtonsoft.Json;
 
-namespace VCubWatcher.Models
+namespace BridgeMonitor.Models
 {
     public class Boats
     {
