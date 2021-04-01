@@ -41,3 +41,4 @@ C:\Users\mat33\source\repos\BridgeMonitor\BridgeMonitor\obj\Debug\net5.0\Razor\V
 C:\Users\mat33\source\repos\BridgeMonitor\BridgeMonitor\obj\Debug\net5.0\Razor\Views\Fermeture\FermetureDetail.cshtml.g.cs
 C:\Users\mat33\source\repos\BridgeMonitor\BridgeMonitor\obj\Debug\net5.0\Razor\Views\Fermeture\NextFermeture.cshtml.g.cs
 C:\Users\mat33\source\repos\BridgeMonitor\BridgeMonitor\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\mat33\source\repos\BridgeMonitor\BridgeMonitor\obj\Debug\net5.0\Razor\Views\Calendar\Calendar.cshtml.g.cs

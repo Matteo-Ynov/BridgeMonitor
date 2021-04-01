@@ -20,11 +20,12 @@
 
 
     <style href="https://bootswatch.com/4/cerulean/bootstrap.css"></style>
-    <div class="card border-primary mb-3" style="max-width: 20rem;">
-        <div class="card-header">@next.BoatName</div>
+    <h1>Prochaine fermeture :</h1>
+    <div class="card border-primary mb-3" style="max-width: 20rem; margin:auto">
+        <div class="card-header">Cause : @next.BoatName</div>
         <div class="card-body">
-            <h4>De @next.ClosingDate.ToString("F") à @next.ReopeningDate.ToString("F")</h4>
-            <h5>Durée : @duree</h5>
+            <h4>Du @next.ClosingDate.ToString("F") au @next.ReopeningDate.ToString("F")</h4>
+            <h5>Durée : @duree heure(s)</h5>
             <div class="alert alert-dismissible alert-info" id="stolencountdown"></div>
             @if ((7 <= next.ClosingDate.Hour & next.ClosingDate.Hour < 9) ^ (17 <= next.ClosingDate.Hour & next.ClosingDate.Hour < 19))
             {
@@ -38,7 +39,6 @@
     </div>
     <p id="nextclose" style="display: none;">@next.ClosingDate.ToString("o")</p>
 
-
     <script>
         var countDownDate = new Date(document.getElementById("nextclose").innerHTML).getTime()
 
@@ -49,8 +49,8 @@
             var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            document.getElementById("stolencountdown").innerHTML = days + "d " + hours + "h "
-                + minutes + "m " + seconds + "s ";
+            document.getElementById("stolencountdown").innerHTML = days + " jours " + hours + " heures "
+                + minutes + "m " + seconds + "s";
         }, 1000);
     </script>
 }

@@ -1,0 +1,51 @@
+﻿@model List<Boats>;
+@using System;
+
+@{
+    ViewData["Title"] = "Calendrier";
+}
+
+
+@{
+    <div style="text-align:center">
+        <button onclick="download()" class="btn btn-primary btn-lg">Télécharger le calendrier</button>
+    </div>
+    <h1 style="text-align:center"></h1>
+    <a style="display:none" id="redir" asp-controller="Fermeture" asp-action="NextFermeture"></a>
+
+    var calendar =
+@"BEGIN:VCALENDAR
+VERSION: 2.0";
+    foreach (var boat in Model)
+    {
+        var txt = String.Format(@"
+BEGIN: VEVENT
+DTSTART; TZID = Europe / London:{0}
+DTEND; TZID = Europe / London:{1}
+SUMMARY:{2}
+END:VEVENT", boat.ClosingDate.ToString("yyyyMMddTHHmmss"), boat.ReopeningDate.ToString("yyyyMMddTHHmmss"), boat.BoatName);
+        calendar += txt;
+    }
+    calendar += "END:VCALENDAR";
+
+<script>
+        function download() {
+        var txt = "@calendar".replaceAll("&#xD;&#xA;", "\n")
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(txt));
+        element.setAttribute('download', "calendar.ics");
+        element.style.display = 'none';
+        document.body.appendChild(element)
+        element.click();
+        var redir = document.getElementById("redir")
+        redir.click()
+    }
+
+
+
+
+</script>
+
+<h1 style="text-align:center">La faut imaginer un calendrier joli affiché mais c'est trop chiant a faire</h1>
+}
+
