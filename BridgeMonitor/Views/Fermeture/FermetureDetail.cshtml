@@ -1,1 +1,47 @@
-﻿
+﻿@model Boats
+
+@{
+    ViewData["Title"] = "Détails Fermeture";
+}
+
+@{
+
+    var duree = Model.ReopeningDate - Model.ClosingDate;
+    var timebefore = Model.ClosingDate - DateTime.Now;
+
+
+    <style href="https://bootswatch.com/4/cerulean/bootstrap.css"></style>
+    <div class="card border-primary mb-3" style="max-width: 20rem;">
+        <div class="card-header">@Model.BoatName</div>
+        <div class="card-body">
+            <h4>De @Model.ClosingDate.ToString("F") à @Model.ReopeningDate.ToString("F")</h4>
+            <h5>Durée : @duree</h5>
+            <div class="alert alert-dismissible alert-info" id="stolencountdown"></div>
+            @if ((7 <= Model.ClosingDate.Hour & Model.ClosingDate.Hour < 9) ^ (17 <= Model.ClosingDate.Hour & Model.ClosingDate.Hour < 19))
+            {
+                <h5>Risque de bouchons : Elevé</h5>
+            }
+            else
+            {
+                <h5>Risque de bouchons : Faible</h5>
+            }
+        </div>
+    </div>
+    <p id="nextclose" style="display: none;">@Model.ClosingDate.ToString("o")</p>
+
+
+    <script>
+        var countDownDate = new Date(document.getElementById("nextclose").innerHTML).getTime()
+
+        var x = setInterval(function () {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById("stolencountdown").innerHTML = days + "d " + hours + "h "
+                + minutes + "m " + seconds + "s ";
+        }, 1000);
+    </script>
+}
