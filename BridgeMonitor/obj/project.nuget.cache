@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "0ec9kSPYSbAENqxD4SHra2ofGOG2k/yZH6m0efQcaaNuac1zRdsMFg4gOX5lgF25uszTqct0zre++56EKbshEQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\mat33\\source\\repos\\BridgeMonitor\\BridgeMonitor\\BridgeMonitor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mat33\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
