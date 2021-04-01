@@ -13,24 +13,25 @@
 
 
     <style href="https://bootswatch.com/4/cerulean/bootstrap.css"></style>
-    <div class="card border-primary mb-3" style="max-width: 20rem; margin:auto">
-        <div class="card-header">Cause : @Model.BoatName</div>
-        <div class="card-body">
-            <h4>Du @Model.ClosingDate.ToString("F", fr) au @Model.ReopeningDate.ToString("F", fr)</h4>
-            <h5>Durée : @duree heure(s)</h5>
-            <div class="alert alert-dismissible alert-info" id="stolencountdown"></div>
-            @if ((7 <= Model.ClosingDate.Hour & Model.ClosingDate.Hour < 9) ^ (17 <= Model.ClosingDate.Hour & Model.ClosingDate.Hour < 19))
-            {
-                <h5>Risque de bouchons : Elevé</h5>
-            }
-            else
-            {
-                <h5>Risque de bouchons : Faible</h5>
-            }
+    <div class="d-flex justify-content-center flex-column">
+        <div class="card border-primary mb-3" style="max-width: 20rem; margin:auto">
+            <div class="card-header">Cause : @Model.BoatName</div>
+            <div class="card-body">
+                <h4>Du @Model.ClosingDate.ToString("F", fr) au @Model.ReopeningDate.ToString("F", fr)</h4>
+                <h5>Durée : @duree heure(s)</h5>
+                <div class="alert alert-dismissible alert-info" id="stolencountdown"></div>
+                @if ((7 <= Model.ClosingDate.Hour & Model.ClosingDate.Hour < 9) ^ (17 <= Model.ClosingDate.Hour & Model.ClosingDate.Hour < 19))
+                {
+                    <h5>Risque de bouchons : Elevé</h5>
+                }
+                else
+                {
+                    <h5>Risque de bouchons : Faible</h5>
+                }
+            </div>
         </div>
+        <p id="nextclose" style="display: none;">@Model.ClosingDate.ToString("o")</p>
     </div>
-    <p id="nextclose" style="display: none;">@Model.ClosingDate.ToString("o")</p>
-
     <script>
         var countDownDate = new Date(document.getElementById("nextclose").innerHTML).getTime()
 

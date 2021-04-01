@@ -22,24 +22,26 @@
 
 
     <style href="https://bootswatch.com/4/cerulean/bootstrap.css"></style>
-    <h1>Prochaine fermeture :</h1>
-    <div class="card border-primary mb-3" style="max-width: 20rem; margin:auto">
-        <div class="card-header">Cause : @next.BoatName</div>
-        <div class="card-body">
-            <h4>Du @next.ClosingDate.ToString("F", fr) au @next.ReopeningDate.ToString("F", fr)</h4>
-            <h5>Durée : @duree heure(s)</h5>
-            <div class="alert alert-dismissible alert-info" id="stolencountdown"></div>
-            @if ((7 <= next.ClosingDate.Hour & next.ClosingDate.Hour < 9) ^ (17 <= next.ClosingDate.Hour & next.ClosingDate.Hour < 19))
-            {
-                <h5>Risque de bouchons : Elevé</h5>
-            }
-            else
-            {
-                <h5>Risque de bouchons : Faible</h5>
-            }
+    <div class="d-flex justify-content-center flex-column">
+        <h1>Prochaine fermeture :</h1>
+        <div class="card border-primary mb-3" style="max-width: 20rem; margin:auto">
+            <div class="card-header">Cause : @next.BoatName</div>
+            <div class="card-body">
+                <h4>Du @next.ClosingDate.ToString("F", fr) au @next.ReopeningDate.ToString("F", fr)</h4>
+                <h5>Durée : @duree heure(s)</h5>
+                <div class="alert alert-dismissible alert-info" id="stolencountdown"></div>
+                @if ((7 <= next.ClosingDate.Hour & next.ClosingDate.Hour < 9) ^ (17 <= next.ClosingDate.Hour & next.ClosingDate.Hour < 19))
+                {
+                    <h5>Risque de bouchons : Elevé</h5>
+                }
+                else
+                {
+                    <h5>Risque de bouchons : Faible</h5>
+                }
+            </div>
         </div>
+        <p id="nextclose" style="display: none;">@next.ClosingDate.ToString("o")</p>
     </div>
-    <p id="nextclose" style="display: none;">@next.ClosingDate.ToString("o")</p>
 
     <script>
         var countDownDate = new Date(document.getElementById("nextclose").innerHTML).getTime()
