@@ -1,10 +1,12 @@
-﻿@model List<Boats>
+﻿@using System.Globalization;
+@model List<Boats>
 
 @{
     ViewData["Title"] = "Toutes les Fermeture";
 }
 
 @{
+    CultureInfo fr = CultureInfo.GetCultureInfo("fr-FR");
     var passed = new List<Boats>();
     var tocome = new List<Boats>();
     var id = 0;
@@ -37,9 +39,9 @@
                 var duree = boat.ReopeningDate - boat.ClosingDate;
                 <tr>
                     <td>@boat.BoatName</td>
-                    <td>@boat.ClosingDate.ToString("F")</td>
+                    <td>@boat.ClosingDate.ToString("F", fr)</td>
                     <td>@duree.Hours heure(s) @duree.Minutes minute(s)</td>
-                    <td>@boat.ReopeningDate.ToString("F")</td>
+                    <td>@boat.ReopeningDate.ToString("F", fr)</td>
                     <td><a asp-area="" asp-controller="Fermeture" asp-action="FermetureDetail" asp-route-id="@id"><button type="button" class="btn btn-primary">En savoir plus</button></a></td>
                 </tr>
                 id += 1;
