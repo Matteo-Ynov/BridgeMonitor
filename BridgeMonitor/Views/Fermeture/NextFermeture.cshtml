@@ -5,9 +5,8 @@
 }
 
 @{
-    var orderedlist = Model.OrderBy(closing => Convert.ToDateTime(closing.ClosingDate)).ToList();
-    var next = orderedlist[0];
-    foreach (var hour in orderedlist)
+    var next = Model[0];
+    foreach (var hour in Model)
     {
         if (hour.ClosingDate > DateTime.Now)
         {

@@ -5,27 +5,78 @@
 }
 
 @{
-        var ListOfClosing = Model.OrderBy(closing => Convert.ToDateTime(closing.ClosingDate)).ToList();
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Nom du bateau</th>
-                    <th scope="col">Type de fermeture</th>
-                    <th scope="col">Date de fermeture</th>
-                    <th scope="col">Date de réouverture</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var boat in ListOfClosing)
-                {
-                    <tr>
-                        <td>@boat.BoatName</td>
-                        <td>@boat.ClosingType</td>
-                        <td>@boat.ClosingDate</td>
-                        <td>@boat.ReopeningDate</td>
-                    </tr>
-                }
+    var passed = new List<Boats>();
+    var tocome = new List<Boats>();
+    var id = 0;
+    foreach (var boat in Model)
+    {
+        if (boat.ClosingDate > DateTime.Now)
+        {
+            tocome.Add(boat);
+        }
+        else
+        {
+            passed.Add(boat);
 
-            </tbody>
-        </table>
+        }
     }
+    <h1>Passé :</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Cause</th>
+                <th scope="col">Date de la fermeture</th>
+                <th scope="col">Durée de la fermeture</th>
+                <th scope="col">Heure de réouverture</th>
+                <th scope="col">Détails</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var boat in passed)
+            {
+                var duree = boat.ReopeningDate - boat.ClosingDate;
+                <tr>
+                    <td>@boat.BoatName</td>
+                    <td>@boat.ClosingDate.ToString("F")</td>
+                    <td>@duree.Hours heure(s) @duree.Minutes minute(s)</td>
+                    <td>@boat.ReopeningDate.ToString("F")</td>
+                    <td><a asp-area="" asp-controller="Fermeture" asp-action="FermetureDetail" asp-route-id="@id"><button type="button" class="btn btn-primary">En savoir plus</button></a></td>
+                </tr>
+                id += 1;
+            }
+
+        </tbody>
+    </table>
+    <h1>A venir :</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Cause</th>
+                <th scope="col">Date de la fermeture</th>
+                <th scope="col">Durée de la fermeture</th>
+                <th scope="col">Heure de réouverture</th>
+                <th scope="col">Détails</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var boat in tocome)
+            {
+                var duree = boat.ReopeningDate - boat.ClosingDate;
+                <tr>
+                    <td>@boat.BoatName</td>
+                    <td>@boat.ClosingDate.ToString("F")</td>
+                    <td>@duree.Hours heure(s) @duree.Minutes minute(s)</td>
+                    <td>@boat.ReopeningDate.ToString("F")</td>
+                    <td><a asp-area="" asp-controller="Fermeture" asp-action="FermetureDetail" asp-route-id="@id"><button type="button" class="btn btn-primary">En savoir plus</button></a></td>
+
+                </tr>
+                id += 1;
+            }
+
+        </tbody>
+    </table>
+
+
+
+
+}

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using Newtonsoft.Json;
 using BridgeMonitor.Models;
+using System.Linq;
 
 namespace BridgeMonitor.Controllers
 {
@@ -21,6 +22,9 @@ namespace BridgeMonitor.Controllers
                     {
                         var json = content.ReadAsStringAsync().Result;
                         BoatsList = JsonConvert.DeserializeObject<List<Boats>>(json);
+                        BoatsList = (from e in BoatsList
+                                orderby e.ClosingDate
+                                select e).ToList();
                     }
                 }
             }
@@ -30,9 +34,11 @@ namespace BridgeMonitor.Controllers
             return View(BoatsList);
         }
 
-        public IActionResult FermetureDetail()
-        {
-            return View(BoatsList);
+        [HttpGet]
+        [Route("/Fermeture/FermetureDetail/{id}")]
+        public IActionResult FermetureDetail(int id)
+        {     
+            return View(BoatsList[id]);
         }
 
         public IActionResult NextFermeture()
