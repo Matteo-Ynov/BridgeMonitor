@@ -11,24 +11,18 @@ namespace BridgeMonitor.Controllers
 {
     public class FermetureController : Controller
     {
+
         public static List<Boats> BoatsList = new List<Boats>();
+        private static readonly HttpClient client = new HttpClient();
         public FermetureController()
         {
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync("https://api.alexandredubois.com/pont-chaban/api.php").Result)
-                {
-                    using (HttpContent content = response.Content)
-                    {
-                        var json = content.ReadAsStringAsync().Result;
-                        BoatsList = JsonConvert.DeserializeObject<List<Boats>>(json);
-                        BoatsList = (from e in BoatsList
-                                orderby e.ClosingDate
-                                select e).ToList();
-                    }
-                }
-            }
+            var stringTask = client.GetStringAsync("https://api.alexandredubois.com/pont-chaban/api.php");
+            var myJsonResponse = stringTask.Result;
+            var result = JsonConvert.DeserializeObject<List<Boats>>(myJsonResponse);
+            BoatsList = result.OrderBy(closing =>
+            Convert.ToDateTime(closing.ClosingDate)).ToList();
         }
+
         public IActionResult AllFermeture()
         {
             return View(BoatsList);
