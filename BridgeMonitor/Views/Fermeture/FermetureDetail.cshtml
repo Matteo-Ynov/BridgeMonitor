@@ -30,7 +30,7 @@
                 }
             </div>
         </div>
-        <p id="nextclose" style="display: none;">@Model.ClosingDate.ToString("o")</p>
+        <p id="nextclose" style="display: none;">@Model.ClosingDate.AddHours(-2).ToString("o")</p>
     </div>
     <script>
         var countDownDate = new Date(document.getElementById("nextclose").innerHTML).getTime()
