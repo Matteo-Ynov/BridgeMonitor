@@ -10,6 +10,9 @@
     var duree = Model.ReopeningDate - Model.ClosingDate;
     var timebefore = Model.ClosingDate - DateTime.Now;
     CultureInfo fr = CultureInfo.GetCultureInfo("fr-FR");
+    var risk = false;
+    var closing_hour = Model.ClosingDate.Hour;
+    var reopening_hour = Model.ReopeningDate.Hour;
 
 
     <style href="https://bootswatch.com/4/cerulean/bootstrap.css"></style>
@@ -20,7 +23,21 @@
                 <h4>Du @Model.ClosingDate.ToString("F", fr) au @Model.ReopeningDate.ToString("F", fr)</h4>
                 <h5>Durée : @duree heure(s)</h5>
                 <div class="alert alert-dismissible alert-info" id="stolencountdown"></div>
-                @if ((7 <= Model.ClosingDate.Hour & Model.ClosingDate.Hour < 9) ^ (17 <= Model.ClosingDate.Hour & Model.ClosingDate.Hour < 19))
+
+
+
+                @if(closing_hour > reopening_hour){
+                    if(reopening_hour >= 7 ^  closing_hour < 19){
+                        risk = true;
+                    }
+                } else {
+                    for (int hour = closing_hour; hour <= reopening_hour; hour++){
+                        if((7 <= hour & hour < 9) ^ (17 <= hour & hour < 19)){
+                            risk = true;
+                        }
+                    }
+                }
+                @if (risk)
                 {
                     <h5>Risque de bouchons : Elevé</h5>
                 }
